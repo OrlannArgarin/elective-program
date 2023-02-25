@@ -24,7 +24,7 @@ def relative_to_assets(path: str) -> Path:
 
 print(OUTPUT_PATH)
 window = Tk()
-
+window.title("Store Receipt Database")
 window.geometry("1055x731")
 window.configure(bg="#074A5E")
 
@@ -495,9 +495,9 @@ canvas.create_rectangle(
     outline="")
 
 entry_image_2 = PhotoImage(
-    file=relative_to_assets("entry_2.png"))
+    file=relative_to_assets("entry_4.png"))
 entry_bg_2 = canvas.create_image(
-    857.5,
+    905.5,
     446.5,
     image=entry_image_2
 )
@@ -508,31 +508,31 @@ entry_2 = Entry(
     highlightthickness=0
 )
 entry_2.place(
-    x=823.0,
-    y=432.0,
-    width=69.0,
+    x=822.0,
+    y=434.0,
+    width=168.0,
     height=27.0
 )
 
-entry_image_3 = PhotoImage(
-    file=relative_to_assets("entry_3.png"))
-entry_bg_3 = canvas.create_image(
-    945.0,
-    446.5,
-    image=entry_image_3
-)
-entry_3 = Entry(
-    bd=0,
-    bg="#D9D9D9",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_3.place(
-    x=899.0,
-    y=432.0,
-    width=92.0,
-    height=27.0
-)
+# entry_image_3 = PhotoImage(
+#     file=relative_to_assets("entry_3.png"))
+# entry_bg_3 = canvas.create_image(
+#     945.0,
+#     446.5,
+#     image=entry_image_3
+# )
+# entry_3 = Entry(
+#     bd=0,
+#     bg="#D9D9D9",
+#     fg="#000716",
+#     highlightthickness=0
+# )
+# entry_3.place(
+#     x=899.0,
+#     y=432.0,
+#     width=92.0,
+#     height=27.0
+# )
 
 entry_image_4 = PhotoImage(
     file=relative_to_assets("entry_4.png"))
