@@ -8,6 +8,10 @@ from os.path import dirname
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Radiobutton
 from tkinter import *
+from tkinter import ttk
+from formdb import Database
+
+db = Database("mydatabase.db")
 
 
 OUTPUT_PATH = dirname(__file__)
@@ -704,5 +708,48 @@ canvas.create_text(
     fill="#000000",
     font=("TimesNewRomanPSMT", 18 * -1)
 )
+
+tv = ttk.Treeview(columns=(1, 2, 3), style="mystyle.Treeview")
+tv.place(
+    x=675.0,
+    y=165.0,
+    width=320,
+    height=225)
+tv.heading("1", text="ITEM")
+tv.column("1", width=50)
+tv.heading("2", text="QTY")
+tv.column("2", width=50)
+tv.heading("3", text="SUBTOTAL")
+tv.column("3", width=50)
+tv['show'] = 'headings'
+
+
+tv2 = ttk.Treeview(columns=(1, 2, 3, 4), style="mystyle.Treeview")
+tv2.place(
+    x=35.0,
+    y=440.0,
+    width=596,
+    height=256)
+tv2.heading("1", text="Transaction ID")
+tv2.column("1", width=50)
+tv2.heading("2", text="Total Fee")
+tv2.column("2", width=50)
+tv2.heading("3", text="Payment")
+tv2.column("3", width=50)
+tv2.heading("4", text="Change")
+tv2.column("4", width=50)
+tv2['show'] = 'headings'
+
+
+def dispalyAll():
+    tv2.delete(*tv2.get_children())
+    for row in db.fetch():
+        tv2.insert("", END, values=row)
+        # print(row)
+
+
 window.resizable(False, False)
+
+
+dispalyAll()
 window.mainloop()
