@@ -6,7 +6,8 @@
 from pathlib import Path
 from os.path import dirname
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage,Radiobutton
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Radiobutton
+from tkinter import *
 
 
 OUTPUT_PATH = dirname(__file__)
@@ -16,24 +17,25 @@ ASSETS_PATH = OUTPUT_PATH + r"\assets\frame0"
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+
 print(OUTPUT_PATH)
 window = Tk()
 
 window.geometry("1055x731")
-window.configure(bg = "#074A5E")
+window.configure(bg="#074A5E")
 
 
 canvas = Canvas(
     window,
-    bg = "#074A5E",
-    height = 731,
-    width = 1055,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
+    bg="#074A5E",
+    height=731,
+    width=1055,
+    bd=0,
+    highlightthickness=0,
+    relief="ridge"
 )
 
-canvas.place(x = 0, y = 0)
+canvas.place(x=0, y=0)
 canvas.create_rectangle(
     35.0,
     35.0,
@@ -43,177 +45,202 @@ canvas.create_rectangle(
     outline="")
 
 
-itemClicked = ""
+itemClicked = StringVar(value="0")
 
-RButton_vinegar = Radiobutton(window, text = "Vinegar",  variable= itemClicked , value="vinegar",background="#FFFFFF")
+RButton_vinegar = Radiobutton(
+    window, text="Vinegar",  variable=itemClicked, value="vinegar", background="#FFFFFF")
 RButton_vinegar.place(
     x=60.0,
     y=100.0,
     width=100.0,
     height=30.0)
 
-RButton_sugar = Radiobutton(window, text = "Sugar",  variable= itemClicked , value="sugar",background="#FFFFFF")
+RButton_sugar = Radiobutton(
+    window, text="Sugar",  variable=itemClicked, value="sugar", background="#FFFFFF")
 RButton_sugar.place(
     x=57.0,
     y=135.0,
     width=100.0,
     height=30.0)
 
-RButton_soy = Radiobutton(window, text = "Soy Sauce",  variable= itemClicked , value="soy",background="#FFFFFF")
+RButton_soy = Radiobutton(window, text="Soy Sauce",
+                          variable=itemClicked, value="soy", background="#FFFFFF")
 RButton_soy.place(
     x=57.0,
     y=170.0,
     width=100.0,
     height=30.0)
 
-RButton_salt = Radiobutton(window, text = "Salt",  variable= itemClicked , value="salt",background="#FFFFFF")
+RButton_salt = Radiobutton(
+    window, text="Salt",  variable=itemClicked, value="salt", background="#FFFFFF")
 RButton_salt.place(
     x=57.0,
     y=205.0,
     width=100.0,
     height=30.0)
 
-RButton_oil = Radiobutton(window, text = "Oil",  variable = itemClicked , value="oil",background="#FFFFFF")
+RButton_oil = Radiobutton(
+    window, text="Oil",  variable=itemClicked, value="oil", background="#FFFFFF")
 RButton_oil.place(
     x=57.0,
     y=240.0,
     width=100.0,
     height=30.0)
 
-RButton_egg = Radiobutton(window, text = "Egg",  variable = itemClicked , value="egg",background="#FFFFFF")
+RButton_egg = Radiobutton(
+    window, text="Egg",  variable=itemClicked, value="egg", background="#FFFFFF")
 RButton_egg.place(
     x=165.0,
     y=100.0,
     width=100.0,
     height=30.0)
 
-RButton_potato = Radiobutton(window, text = "Potato",  variable = itemClicked , value="potato",background="#FFFFFF")
+RButton_potato = Radiobutton(
+    window, text="Potato",  variable=itemClicked, value="potato", background="#FFFFFF")
 RButton_potato.place(
     x=165.0,
     y=135.0,
     width=100.0,
     height=30.0)
 
-RButton_tomato = Radiobutton(window, text = "Tomato",  variable = itemClicked , value="tomato",background="#FFFFFF")
+RButton_tomato = Radiobutton(
+    window, text="Tomato",  variable=itemClicked, value="tomato", background="#FFFFFF")
 RButton_tomato.place(
     x=165.0,
     y=170.0,
     width=100.0,
     height=30.0)
 
-RButton_onion = Radiobutton(window, text = "Onion",  variable = itemClicked , value="onion",background="#FFFFFF")
+RButton_onion = Radiobutton(
+    window, text="Onion",  variable=itemClicked, value="onion", background="#FFFFFF")
 RButton_onion.place(
     x=165.0,
     y=205.0,
     width=100.0,
     height=30.0)
 
-RButton_garlic = Radiobutton(window, text = "Garlic",  variable = itemClicked , value="garlic",background="#FFFFFF")
+RButton_garlic = Radiobutton(
+    window, text="Garlic",  variable=itemClicked, value="garlic", background="#FFFFFF")
 RButton_garlic.place(
     x=165.0,
     y=240.0,
     width=100.0,
     height=30.0)
 
-RButton_sardines = Radiobutton(window, text = "Sardines",  variable = itemClicked , value="sardines",background="#FFFFFF")
+RButton_sardines = Radiobutton(
+    window, text="Sardines",  variable=itemClicked, value="sardines", background="#FFFFFF")
 RButton_sardines.place(
     x=270.0,
     y=100.0,
     width=100.0,
     height=30.0)
 
-RButton_biscuit = Radiobutton(window, text = "Biscuit",  variable = itemClicked , value="biscuit",background="#FFFFFF")
+RButton_biscuit = Radiobutton(
+    window, text="Biscuit",  variable=itemClicked, value="biscuit", background="#FFFFFF")
 RButton_biscuit.place(
     x=270.0,
     y=135.0,
     width=100.0,
     height=30.0)
 
-RButton_coffee = Radiobutton(window, text = "Instant Coffee",  variable = itemClicked , value="coffee",background="#FFFFFF")
+RButton_coffee = Radiobutton(window, text="Instant Coffee",
+                             variable=itemClicked, value="coffee", background="#FFFFFF")
 RButton_coffee.place(
     x=270.0,
     y=170.0,
     width=100.0,
     height=30.0)
 
-RButton_milo = Radiobutton(window, text = "Milo",  variable = itemClicked , value="milo",background="#FFFFFF")
+RButton_milo = Radiobutton(
+    window, text="Milo",  variable=itemClicked, value="milo", background="#FFFFFF")
 RButton_milo.place(
     x=270.0,
     y=205.0,
     width=100.0,
     height=30.0)
 
-RButton_milk = Radiobutton(window, text = "Milk",  variable = itemClicked , value="milk",background="#FFFFFF")
+RButton_milk = Radiobutton(
+    window, text="Milk",  variable=itemClicked, value="milk", background="#FFFFFF")
 RButton_milk.place(
     x=270.0,
     y=240.0,
     width=100.0,
     height=30.0)
 
-RButton_ariel = Radiobutton(window, text = "Ariel",  variable = itemClicked , value="ariel",background="#FFFFFF")
+RButton_ariel = Radiobutton(
+    window, text="Ariel",  variable=itemClicked, value="ariel", background="#FFFFFF")
 RButton_ariel.place(
     x=375.0,
     y=100.0,
     width=100.0,
     height=30.0)
 
-RButton_downy = Radiobutton(window, text = "Downy",  variable = itemClicked , value="downy",background="#FFFFFF")
+RButton_downy = Radiobutton(
+    window, text="Downy",  variable=itemClicked, value="downy", background="#FFFFFF")
 RButton_downy.place(
     x=375.0,
     y=135.0,
     width=100.0,
     height=30.0)
 
-RButton_bars = Radiobutton(window, text = "Bar Soap",  variable = itemClicked , value="bars",background="#FFFFFF")
+RButton_bars = Radiobutton(window, text="Bar Soap",
+                           variable=itemClicked, value="bars", background="#FFFFFF")
 RButton_bars.place(
     x=375.0,
     y=170.0,
     width=100.0,
     height=30.0)
 
-RButton_joy = Radiobutton(window, text = "Joy",  variable = itemClicked , value="joy",background="#FFFFFF")
+RButton_joy = Radiobutton(
+    window, text="Joy",  variable=itemClicked, value="joy", background="#FFFFFF")
 RButton_joy.place(
     x=375.0,
     y=205.0,
     width=100.0,
     height=30.0)
 
-RButton_toothpaste = Radiobutton(window, text = "Toothpaste",  variable = itemClicked , value="toothpaste",background="#FFFFFF")
+RButton_toothpaste = Radiobutton(
+    window, text="Toothpaste",  variable=itemClicked, value="toothpaste", background="#FFFFFF")
 RButton_toothpaste.place(
     x=375.0,
     y=240.0,
     width=100.0,
     height=30.0)
 
-RButton_mask = Radiobutton(window, text = "Mask",  variable = itemClicked , value="mask",background="#FFFFFF")
+RButton_mask = Radiobutton(
+    window, text="Mask",  variable=itemClicked, value="mask", background="#FFFFFF")
 RButton_mask.place(
     x=480.0,
     y=100.0,
     width=100.0,
     height=30.0)
 
-RButton_alcohol = Radiobutton(window, text = "Alcohol",  variable = itemClicked , value="alcohol",background="#FFFFFF")
+RButton_alcohol = Radiobutton(
+    window, text="Alcohol",  variable=itemClicked, value="alcohol", background="#FFFFFF")
 RButton_alcohol.place(
     x=480.0,
     y=135.0,
     width=100.0,
     height=30.0)
 
-RButton_shampoo = Radiobutton(window, text = "Shampoo",  variable = itemClicked , value="shampoo",background="#FFFFFF")
+RButton_shampoo = Radiobutton(
+    window, text="Shampoo",  variable=itemClicked, value="shampoo", background="#FFFFFF")
 RButton_shampoo.place(
     x=480.0,
     y=170.0,
     width=100.0,
     height=30.0)
 
-RButton_conditioner = Radiobutton(window, text = "Conditioner",  variable = itemClicked , value="conditioner",background="#FFFFFF")
+RButton_conditioner = Radiobutton(
+    window, text="Conditioner",  variable=itemClicked, value="conditioner", background="#FFFFFF")
 RButton_conditioner.place(
     x=480.0,
     y=205.0,
     width=100.0,
     height=30.0)
 
-RButton_rice = Radiobutton(window, text = "Rice Grain",  variable = itemClicked , value="rice",background="#FFFFFF")
+RButton_rice = Radiobutton(window, text="Rice Grain",
+                           variable=itemClicked, value="rice", background="#FFFFFF")
 RButton_rice.place(
     x=480.0,
     y=240.0,
