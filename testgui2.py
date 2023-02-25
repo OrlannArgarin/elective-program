@@ -51,6 +51,30 @@ canvas.create_rectangle(
 
 itemClicked = StringVar(value="0")
 
+# program functions
+
+priceList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+             13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+itemList = ["vinegar", "sugar", "soy", "salt", "oil", "egg", "potato", "tomato", "onion", "garlic", "sardines", "biscuit",
+            "coffee", "milo", "milk", "ariel", "downy", "bars", "joy", "toothpaste", "mask", "alcohol", "shampoo", "conditioner", "rice"]
+
+
+def dispalyAll():
+    tv2.delete(*tv2.get_children())
+    for row in db.fetch():
+        tv2.insert("", END, values=row)
+        # print(row)
+
+
+def submitSelection():
+    test = itemClicked.get()
+    if test in itemList:
+        i = itemList.index(test)
+        # print(i)
+    price = priceList[i]
+    # print(price)
+
+
 RButton_vinegar = Radiobutton(
     window, text="Vinegar",  variable=itemClicked, value="vinegar", background="#FFFFFF")
 RButton_vinegar.place(
@@ -257,7 +281,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=submitSelection,
     relief="flat"
 )
 button_1.place(
@@ -739,13 +763,6 @@ tv2.column("3", width=50)
 tv2.heading("4", text="Change")
 tv2.column("4", width=50)
 tv2['show'] = 'headings'
-
-
-def dispalyAll():
-    tv2.delete(*tv2.get_children())
-    for row in db.fetch():
-        tv2.insert("", END, values=row)
-        # print(row)
 
 
 window.resizable(False, False)
