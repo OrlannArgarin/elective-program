@@ -1,10 +1,11 @@
 from pathlib import Path
 from os.path import dirname
-# Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Radiobutton
+from tkinter import Tk, Canvas, Entry, Button, PhotoImage, Radiobutton
 from tkinter import *
 from tkinter import ttk
 from formdb import Database
+import tkinter.messagebox as messageBox
+import random
 
 db = Database("mydatabase.db")
 
@@ -243,76 +244,6 @@ def deleteSelection():
         tv.delete(selected_item)
     compute()
 
-
-# program functions
-
-priceList = [8, 50, 10, 45, 10, 8, 8, 8, 5, 5, 18, 8,
-             7, 8, 260, 15, 10, 50, 10, 8, 5, 150, 8, 10, 60]
-itemList = ["vinegar", "sugar", "soy", "salt", "oil", "egg", "potato", "tomato", "onion", "garlic", "sardines", "biscuit",
-            "coffee", "milo", "milk", "ariel", "downy", "bars", "joy", "toothpaste", "mask", "alcohol", "shampoo", "conditioner", "rice"]
-
-
-def dispalyAll():
-    tv2.delete(*tv2.get_children())
-    for row in db.fetch():
-        tv2.insert("", END, values=row)
-        # print(row)
-
-
-def submitSelection():
-    item = itemClicked.get()
-    price = 0.0
-    if item in itemList:
-        i = itemList.index(item)
-    price = priceList[i]
-    quantity = entry_1.get()
-    try:
-        int(quantity)
-    except:
-        messageBox.showinfo("Item Insertion Status", "Input whole numbers in 'Quantity'")
-        checkError = 1
-    else:
-        price = price * float(quantity)
-        price = "%.2f" % price
-        tv.insert("","end",values=(item, quantity, price))
-
-def submitReceipt():
-    checkError =0
-    totalfee = 0.0
-    for child in tv.get_children():
-        totalfee += float(tv.item(child)["values"][2])
-    payment = entry_4.get()
-    if totalfee == 0 : 
-        messageBox.showinfo("Receipt Submission Status", "Items need to be ordered first")
-        checkError = 1
-    elif payment == "" : 
-        messageBox.showinfo("Receipt Submission Status", "No Payment inputted")
-        checkError = 1
-    else:
-        try:
-            int(payment)
-        except:
-            messageBox.showinfo("Receipt Submission Status", "Payment inputted is not a number")
-            checkError = 1
-        else:
-            if float(payment) < totalfee:
-                messageBox.showinfo("Receipt Submission Status", "Total Fee higher than Payment")
-                checkError = 1
-            if checkError == 0:
-                change = float(payment) - totalfee
-                change = "%.2f" % change
-                totalfee = "%.2f" % totalfee
-
-                entry_2.config(state = NORMAL)   #Total Fee Display
-                entry_2.insert(0, str(totalfee))
-                entry_2.config(state = DISABLED)
-
-                entry_5.config(state = NORMAL) 
-                entry_5.insert(0, str(change)) #Total Change Display
-                entry_5.config(state = DISABLED)
-
-def deleteReceipt():
-    tv.delete(*tv.get_children())
 
 RButton_vinegar = Radiobutton(
     window, text="Vinegar",  variable=itemClicked, value="vinegar", background="#FFFFFF")
@@ -784,25 +715,9 @@ totalEntry.place(
 #     x=905.5,
 #     y=446.5
 
-# entry_image_3 = PhotoImage(
-#     file=relative_to_assets("entry_3.png"))
-# entry_bg_3 = canvas.create_image(
-#     945.0,
-#     446.5,
-#     image=entry_image_3
 # )
-# entry_3 = Entry(
-#     bd=0,
-#     bg="#D9D9D9",
-#     fg="#000716",
-#     highlightthickness=0
-# )
-# entry_3.place(
-#     x=899.0,
-#     y=432.0,
-#     width=92.0,
-#     height=27.0
-# )
+# totalEntry.insert(0, "hello")
+
 
 payment_entry_image = PhotoImage(
     file=relative_to_assets("entry_4.png"))
