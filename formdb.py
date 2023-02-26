@@ -1,4 +1,5 @@
 import sqlite3
+import tkinter.messagebox as messageBox
 
 
 class Database:
@@ -7,11 +8,10 @@ class Database:
         self.cur = self.con.cursor()
         sql = """
         CREATE TABLE IF NOT EXISTS sales(
-            "transaction_id" text NOT NULL,
+            "transaction_id" INTEGER PRIMARY KEY UNIQUE,
             "total_fee" text NOT NULL,
             "payment" text NOT NULL,
-            "change" text NOT NULL,
-            PRIMARY KEY ("transaction_id")
+            "change" text NOT NULL
             )
         """
         self.cur.execute(sql)
@@ -25,7 +25,7 @@ class Database:
 
     # Fetch All Data from DB
     def fetch(self):
-        self.cur.execute("SELECT * from sales")
+        self.cur.execute("SELECT * FROM sales")
         rows = self.cur.fetchall()
         # print(rows)
         return rows
@@ -33,7 +33,14 @@ class Database:
     # Delete a Record in DB
     def remove(self, transaction_id):
         self.cur.execute(
-            "delete from sales where transaction_id=?", (transaction_id))
+            "delete from sales where transaction_id=?", (transaction_id,))
+        self.con.commit()
+
+    def purge(self):
+        self.cur.execute("DELETE FROM sales;",)
+        str = f"We have deleted {self.cur.rowcount} records from the table."
+        messageBox.showinfo("PURGED", str)
+
         self.con.commit()
 
     # Update a Record in DB
@@ -49,32 +56,3 @@ class Database:
         rows = self.cur.fetchall()
         self.con.commit()
         return rows
-
-    # def filterYearLevel(self):
-    #     self.cur.execute(
-    #         "select year_level_id, COUNT(year_level_id) from studentreg GROUP BY year_level_id")
-    #     rows = self.cur.fetchall()
-    #     # print(rows)
-    #     return rows
-
-    # def filterSports(self):
-    #     self.cur.execute(
-    #         "select sports_id, COUNT(sports_id) from studentreg GROUP BY sports_id")
-    #     rows = self.cur.fetchall()
-    #     # print(rows)
-    #     return rows
-
-    # def filterSex(self):
-    #     self.cur.execute(
-    #         "select sex_id, COUNT(sex_id) from studentreg GROUP BY sex_id")
-    #     rows = self.cur.fetchall()
-    #     # print(rows)
-    #     return rows
-
-# "sex_id" text NOT NULL,
-#             "year_level_id" text NOT NULL,
-#             "sports_id" text,
-#             PRIMARY KEY ("student_number"),
-#             FOREIGN KEY ("sex_id") REFERENCES "sex_table" ("sex") ON DELETE RESTRICT ON UPDATE RESTRICT,
-#             FOREIGN KEY ("year_level_id") REFERENCES "year_level_table" ("year_level") ON DELETE RESTRICT ON UPDATE RESTRICT,
-#             FOREIGN KEY ("sports_id") REFERENCES "sports_table" ("sports") ON DELETE RESTRICT ON UPDATE RESTRICT
