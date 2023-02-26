@@ -9,6 +9,8 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Radiobutton
 from tkinter import *
 from tkinter import ttk
 from formdb import Database
+from tkinter import messagebox as messageBox
+import random
 
 db = Database("mydatabase.db")
 
@@ -269,7 +271,7 @@ def submitSelection():
     if item in itemList:
         i = itemList.index(item)
     price = priceList[i]
-    quantity = entry_1.get()
+    quantity = qtyEntry.get()
     try:
         int(quantity)
     except:
@@ -285,7 +287,7 @@ def submitReceipt():
     totalfee = 0.0
     for child in tv.get_children():
         totalfee += float(tv.item(child)["values"][2])
-    payment = entry_4.get()
+    payment = payment_entry.get()
     if totalfee == 0 : 
         messageBox.showinfo("Receipt Submission Status", "Items need to be ordered first")
         checkError = 1
@@ -307,13 +309,13 @@ def submitReceipt():
                 change = "%.2f" % change
                 totalfee = "%.2f" % totalfee
 
-                entry_2.config(state = NORMAL)   #Total Fee Display
-                entry_2.insert(0, str(totalfee))
-                entry_2.config(state = DISABLED)
+                totalEntry.config(state = NORMAL)   #Total Fee Display
+                totalEntry.insert(0, str(totalfee))
+                totalEntry.config(state = DISABLED)
 
-                entry_5.config(state = NORMAL) 
-                entry_5.insert(0, str(change)) #Total Change Display
-                entry_5.config(state = DISABLED)
+                change_entry.config(state = NORMAL) 
+                change_entry.insert(0, str(change)) #Total Change Display
+                change_entry.config(state = DISABLED)
 
 def deleteReceipt():
     tv.delete(*tv.get_children())
@@ -768,7 +770,7 @@ totalEntry_bg = canvas.create_image(
     446.5,
     image=totalEntry_image
 )
-entry_2 = Entry(
+totalEntry = Entry(
     bd=0,
     bg="#D9D9D9",
     fg="#000716",
@@ -781,26 +783,6 @@ totalEntry.place(
     width=168.0,
     height=27.0
 )
-
-# entry_image_3 = PhotoImage(
-#     file=relative_to_assets("entry_3.png"))
-# entry_bg_3 = canvas.create_image(
-#     945.0,
-#     446.5,
-#     image=entry_image_3
-# )
-# entry_3 = Entry(
-#     bd=0,
-#     bg="#D9D9D9",
-#     fg="#000716",
-#     highlightthickness=0
-# )
-# entry_3.place(
-#     x=899.0,
-#     y=432.0,
-#     width=92.0,
-#     height=27.0
-# )
 
 
 payment_entry_image = PhotoImage(
@@ -830,7 +812,7 @@ change_entry_bg = canvas.create_image(
     526.5,
     image=change_entry_image
 )
-entry_5 = Entry(
+change_entry = Entry(
     bd=0,
     bg="#D9D9D9",
     fg="#000716",
